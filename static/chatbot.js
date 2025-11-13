@@ -52,7 +52,7 @@ function initializeChatbot(config) {
 
         const html = document.documentElement;
         const body = document.body;
-        
+
         // Check common theme attributes and classes
         const themeChecks = [
             () => html.getAttribute('data-theme'),
@@ -79,7 +79,7 @@ function initializeChatbot(config) {
             document.getElementById('pocketflow-chat-icon'),
             document.getElementById('pocketflow-chat-window')
         ];
-        
+
         elements.forEach(el => el?.setAttribute('data-chatbot-theme', newTheme));
     }
 
@@ -95,9 +95,9 @@ function initializeChatbot(config) {
         // Watch for attribute and class changes
         const observer = new MutationObserver(checkThemeChange);
         [document.documentElement, document.body].forEach(el => {
-            observer.observe(el, { 
-                attributes: true, 
-                attributeFilter: ['data-theme', 'data-color-scheme', 'data-bs-theme', 'class'] 
+            observer.observe(el, {
+                attributes: true,
+                attributeFilter: ['data-theme', 'data-color-scheme', 'data-bs-theme', 'class']
             });
         });
 
@@ -377,14 +377,14 @@ function initializeChatbot(config) {
         }
 
         .pocketflow-message {
-            margin-bottom: 4px; /* Reduced margin since actions will add spacing */
+            margin-bottom: 4px;
             padding: 10px 14px;
             border-radius: 1rem;
             max-width: 80%;
             line-height: 1.4;
             font-size: 14px;
             word-wrap: break-word;
-            display: inline-block; /* Use inline-block for proper positioning */
+            display: inline-block;
         }
 
         .pocketflow-message.user {
@@ -447,6 +447,245 @@ function initializeChatbot(config) {
             margin: 0;
             background-color: transparent;
             border: none;
+        }
+
+        /* ========================================
+        PRODUCT CARD STYLES
+        ======================================== */
+
+        /* Product Grid Container */
+        .pocketflow-product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0;
+            margin: 12px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Product Card */
+        .pocketflow-product-card {
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            background: white;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            position: relative;
+        }
+
+        .pocketflow-product-card:nth-child(1),
+        .pocketflow-product-card:nth-child(2) {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .pocketflow-product-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            z-index: 10;
+        }
+
+        /* Product Image */
+        .pocketflow-product-image-wrapper {
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background: #fff;
+            text-decoration: none;
+        }
+
+        .pocketflow-product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Product Content */
+        .pocketflow-product-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin-top: 8px;
+        }
+
+        .pocketflow-product-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #111827;
+            text-decoration: none;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+            margin-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .pocketflow-product-card:hover .pocketflow-product-name {
+            color: #2563eb;
+        }
+
+        /* Price Section */
+        .pocketflow-price-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .pocketflow-current-price {
+            color: #ef4444;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1;
+        }
+
+        .pocketflow-original-price {
+            color: #6b7280;
+            font-size: 12px;
+            text-decoration: line-through;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        /* Variant Attributes */
+        .pocketflow-variant-attributes {
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .pocketflow-color-label {
+            margin-bottom: 4px;
+            font-size: 12px;
+            letter-spacing: -0.025em;
+            color: #6b7280;
+        }
+
+        .pocketflow-color-swatches {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pocketflow-color-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #dbeafe;
+            box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.05), 0 0 0 1px #93c5fd;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .pocketflow-color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rating Section */
+        .pocketflow-rating-wrapper {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .pocketflow-stars {
+            display: inline-flex;
+            position: relative;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .pocketflow-stars::before {
+            content: "★★★★★";
+            color: #d1d5db;
+            letter-spacing: 2px;
+        }
+
+        .pocketflow-stars::after {
+            content: "★★★★★";
+            color: #fbbf24;
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            width: var(--rating-width, 0%);
+            letter-spacing: 2px;
+        }
+
+        .pocketflow-review-count {
+            color: #6b7280;
+            font-size: 12px;
+            margin-left: 4px;
+            line-height: 1;
+        }
+
+        /* Add to Cart Button */
+        .pocketflow-add-to-cart-btn {
+            margin-top: auto;
+            padding-top: 12px;
+        }
+
+        .pocketflow-add-to-cart-btn button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 12px;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 400;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            color: #4b5563;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pocketflow-add-to-cart-btn button:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .pocketflow-add-to-cart-btn svg {
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .pocketflow-product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .pocketflow-product-card {
+                padding: 6px;
+            }
+            
+            .pocketflow-product-name {
+                font-size: 13px;
+            }
+            
+            .pocketflow-current-price {
+                font-size: 14px;
+            }
+        }
+
+        /* Special styling when inside bot message */
+        .pocketflow-message.bot .pocketflow-product-grid {
+            max-width: 100%;
+            margin: 8px -4px;
+        }
+
+        .pocketflow-message.bot .pocketflow-product-card {
+            background: #ffffff;
         }
 
         /* --- COPY BUTTON STYLES --- */
@@ -652,7 +891,7 @@ function initializeChatbot(config) {
     const loadResource = (url, type = 'script') => {
         const selector = type === 'script' ? `script[src="${url}"]` : `link[href="${url}"]`;
         if (document.querySelector(selector)) return Promise.resolve();
-        
+
         return new Promise(resolve => {
             const element = document.createElement(type === 'script' ? 'script' : 'link');
             if (type === 'script') {
@@ -763,11 +1002,11 @@ function initializeChatbot(config) {
         loadResource('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css', 'css')
     ]).then(() => {
         console.log('Chatbot dependencies loaded successfully');
-        
+
         // Initialize libraries
         if (window.mermaid) {
             try {
-                window.mermaid.initialize({ 
+                window.mermaid.initialize({
                     startOnLoad: false,
                     theme: 'default',
                     securityLevel: 'loose'
@@ -784,15 +1023,15 @@ function initializeChatbot(config) {
             try {
                 if (window.hljs) {
                     window.marked.setOptions({
-                        highlight: function(code, lang) {
+                        highlight: function (code, lang) {
                             if (lang && window.hljs.getLanguage(lang)) {
                                 try {
                                     return window.hljs.highlight(code, { language: lang }).value;
-                                } catch (err) {}
+                                } catch (err) { }
                             }
                             try {
                                 return window.hljs.highlightAuto(code).value;
-                            } catch (err) {}
+                            } catch (err) { }
                             return code;
                         },
                         langPrefix: 'hljs language-'
@@ -822,13 +1061,13 @@ function initializeChatbot(config) {
                 try {
                     const textContent = welcomeMessage.innerText || welcomeMessage.textContent || '';
                     await navigator.clipboard.writeText(textContent);
-                    
+
                     // Show success feedback
                     initialCopyButton.classList.add('copied');
                     initialCopyButton.querySelector('.copy-icon').style.display = 'none';
                     initialCopyButton.querySelector('.check-icon').style.display = 'block';
                     initialCopyButton.setAttribute('aria-label', 'Copied!');
-                    
+
                     // Reset after 2 seconds
                     setTimeout(() => {
                         initialCopyButton.classList.remove('copied');
@@ -836,7 +1075,7 @@ function initializeChatbot(config) {
                         initialCopyButton.querySelector('.check-icon').style.display = 'none';
                         initialCopyButton.setAttribute('aria-label', 'Copy message');
                     }, 2000);
-                    
+
                 } catch (err) {
                     console.error('Failed to copy text: ', err);
                     // Fallback for older browsers
@@ -847,12 +1086,12 @@ function initializeChatbot(config) {
                         textArea.select();
                         document.execCommand('copy');
                         document.body.removeChild(textArea);
-                        
+
                         // Show success feedback
                         initialCopyButton.classList.add('copied');
                         initialCopyButton.querySelector('.copy-icon').style.display = 'none';
                         initialCopyButton.querySelector('.check-icon').style.display = 'block';
-                        
+
                         setTimeout(() => {
                             initialCopyButton.classList.remove('copied');
                             initialCopyButton.querySelector('.copy-icon').style.display = 'block';
@@ -874,7 +1113,7 @@ function initializeChatbot(config) {
             const { chatIcon, chatWindow } = createChatElements();
             const welcomeMessage = document.getElementById('pocketflow-chat-welcome-message');
             welcomeMessage.innerHTML = `Welcome! I'm here to help you with questions about: <a href="${finalCurrentUrl}" target="_blank" style="color: var(--chatbot-primary); text-decoration: none;">${finalCurrentUrl}</a>. What would you like to know?`;
-            
+
             initializeChatbotLogic(finalCurrentUrl, extra_urls, prefixes, chatbotName, wsUrl, instruction, isOpen, wasCurrentUrlProvided);
         } catch (fallbackError) {
             console.error('Failed to create fallback chatbot:', fallbackError);
@@ -901,14 +1140,14 @@ function initializeChatbot(config) {
         let socket = null;
         let isFirstMessage = true;
         let hasPageChanged = false; // Track if page changed since last conversation
-        
+
 
 
         // Set initial state if opened by default
         if (isOpenByDefault) {
             isChatMaximized = true;
             chatWindow.classList.add('open', 'maximized');
-            
+
             const [iconMax, iconMin] = ['icon-maximize', 'icon-minimize'].map(cls => maximizeButton.querySelector(`.${cls}`));
             iconMax.style.display = 'none';
             iconMin.style.display = 'block';
@@ -920,20 +1159,20 @@ function initializeChatbot(config) {
             chatInput.style.height = 'auto';
             const newHeight = Math.min(chatInput.scrollHeight, 120);
             chatInput.style.height = newHeight + 'px';
-            
+
             // Ensure overflow is always hidden to prevent scrollbars
             chatInput.style.overflow = 'hidden';
-            
+
             const currentLength = chatInput.value.length;
             charCounter.textContent = `${currentLength}/1000`;
-            
+
             charCounter.classList.remove('warning', 'error');
             if (currentLength > 900) {
                 charCounter.classList.add('error');
             } else if (currentLength > 800) {
                 charCounter.classList.add('warning');
             }
-            
+
             if (!chatInput.disabled) {
                 sendButton.disabled = currentLength > 1000 || currentLength === 0;
             }
@@ -941,18 +1180,18 @@ function initializeChatbot(config) {
 
         // Connection status management
         function setStatus(status) { // 'connecting', 'connected', 'disconnected'
-            if(connectionStatus) {
+            if (connectionStatus) {
                 connectionStatus.className = `pocketflow-status-${status}`;
             }
         }
-        
+
         // Chat window toggle functionality
         function toggleChat(forceOpen = null) {
             isChatOpen = forceOpen !== null ? forceOpen : !isChatOpen;
             chatWindow.classList.toggle('open', isChatOpen);
             if (isChatOpen) {
                 chatInput.focus();
-                connectWebSocket(); 
+                connectWebSocket();
             } else {
                 // When closing, also un-maximize and reset state
                 if (isChatMaximized) {
@@ -987,28 +1226,28 @@ function initializeChatbot(config) {
                 console.warn('Marked library not available, returning plain text');
                 return markdownText.replace(/\n/g, '<br>');
             }
-            
+
             try {
                 let html = window.marked.parse(markdownText);
-                
+
                 // Only try mermaid if library is available
                 if (window.mermaid) {
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = html;
-                    
+
                     const mermaidBlocks = tempDiv.querySelectorAll('code.language-mermaid');
                     for (let i = 0; i < mermaidBlocks.length; i++) {
                         const block = mermaidBlocks[i];
                         const mermaidCode = block.textContent;
-                        
+
                         try {
                             const diagramId = `mermaid-diagram-${Date.now()}-${i}`;
                             const { svg } = await window.mermaid.render(diagramId, mermaidCode);
-                            
+
                             const svgContainer = document.createElement('div');
                             svgContainer.className = 'pocketflow-mermaid-diagram';
                             svgContainer.innerHTML = svg;
-                            
+
                             const preElement = block.closest('pre');
                             if (preElement) {
                                 preElement.parentNode.replaceChild(svgContainer, preElement);
@@ -1018,10 +1257,10 @@ function initializeChatbot(config) {
                             block.textContent = `Error rendering diagram: ${error.message}\n\n${mermaidCode}`;
                         }
                     }
-                    
+
                     return tempDiv.innerHTML;
                 }
-                
+
                 return html;
             } catch (error) {
                 console.error('Markdown rendering error:', error);
@@ -1033,11 +1272,11 @@ function initializeChatbot(config) {
         function addMessage(content, isUser = false, isSystem = false) {
             const messageContainer = document.createElement('div');
             messageContainer.classList.add('pocketflow-message-container');
-            
+
             if (isUser) {
                 messageContainer.classList.add('user');
             }
-            
+
             const messageElement = document.createElement('div');
             if (isSystem) {
                 messageElement.classList.add('pocketflow-message', 'system');
@@ -1046,14 +1285,15 @@ function initializeChatbot(config) {
                 messageContainer.appendChild(messageElement);
             } else {
                 messageElement.classList.add('pocketflow-message', isUser ? 'user' : 'bot');
+                console.log('Adding message content:', content);
                 messageElement.innerHTML = content;
                 messageContainer.appendChild(messageElement);
-                
+
                 // Add action buttons for non-system messages
                 if (!isUser) { // Only add copy button for bot messages
                     const actionsContainer = document.createElement('div');
                     actionsContainer.classList.add('pocketflow-message-actions');
-                    
+
                     const copyButton = document.createElement('button');
                     copyButton.classList.add('pocketflow-copy-button');
                     copyButton.setAttribute('aria-label', 'Copy message');
@@ -1066,19 +1306,19 @@ function initializeChatbot(config) {
                             <polyline points="20,6 9,17 4,12"/>
                         </svg>
                     `;
-                    
+
                     copyButton.addEventListener('click', async () => {
                         try {
                             // Get the text content without HTML tags
                             const textContent = messageElement.innerText || messageElement.textContent || '';
                             await navigator.clipboard.writeText(textContent);
-                            
+
                             // Show success feedback
                             copyButton.classList.add('copied');
                             copyButton.querySelector('.copy-icon').style.display = 'none';
                             copyButton.querySelector('.check-icon').style.display = 'block';
                             copyButton.setAttribute('aria-label', 'Copied!');
-                            
+
                             // Reset after 2 seconds
                             setTimeout(() => {
                                 copyButton.classList.remove('copied');
@@ -1086,7 +1326,7 @@ function initializeChatbot(config) {
                                 copyButton.querySelector('.check-icon').style.display = 'none';
                                 copyButton.setAttribute('aria-label', 'Copy message');
                             }, 2000);
-                            
+
                         } catch (err) {
                             console.error('Failed to copy text: ', err);
                             // Fallback for older browsers
@@ -1097,12 +1337,12 @@ function initializeChatbot(config) {
                                 textArea.select();
                                 document.execCommand('copy');
                                 document.body.removeChild(textArea);
-                                
+
                                 // Show success feedback
                                 copyButton.classList.add('copied');
                                 copyButton.querySelector('.copy-icon').style.display = 'none';
                                 copyButton.querySelector('.check-icon').style.display = 'block';
-                                
+
                                 setTimeout(() => {
                                     copyButton.classList.remove('copied');
                                     copyButton.querySelector('.copy-icon').style.display = 'block';
@@ -1113,34 +1353,34 @@ function initializeChatbot(config) {
                             }
                         }
                     });
-                    
+
                     actionsContainer.appendChild(copyButton);
                     messageContainer.appendChild(actionsContainer);
                 }
             }
-            
+
             chatMessages.appendChild(messageContainer);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        function showTyping() { 
-            typingIndicator.classList.add('active'); 
-            chatMessages.scrollTop = chatMessages.scrollHeight; 
+        function showTyping() {
+            typingIndicator.classList.add('active');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-        
-        function hideTyping() { 
-            typingIndicator.classList.remove('active'); 
+
+        function hideTyping() {
+            typingIndicator.classList.remove('active');
         }
 
         function clearChatHistory() {
             // Keep only the context banner and welcome message
             const contextBanner = document.getElementById('pocketflow-chat-context-banner');
             const welcomeMessageContainer = document.querySelector('.pocketflow-message-container');
-            
+
             chatMessages.innerHTML = '';
             if (contextBanner) chatMessages.appendChild(contextBanner);
             if (welcomeMessageContainer) chatMessages.appendChild(welcomeMessageContainer);
-            
+
             const clearDiv = document.createElement('div');
             clearDiv.style.clear = 'both';
             chatMessages.appendChild(clearDiv);
@@ -1151,27 +1391,27 @@ function initializeChatbot(config) {
             if (socket && socket.readyState === WebSocket.OPEN) {
                 socket.close();
             }
-            
+
             // Clear chat history
             clearChatHistory();
-            
+
             // Reset conversation state
             isFirstMessage = true;
             hasPageChanged = false;
-            
+
             // Hide typing indicator
             hideTyping();
-            
+
             // Re-enable input
             chatInput.disabled = false;
             sendButton.disabled = chatInput.value.trim().length === 0;
-            
+
             // Add system message to indicate new conversation started
             addMessage('New conversation started!', false, true);
-            
+
             // Focus on input
             chatInput.focus();
-            
+
             // Reset connection status
             setStatus('disconnected');
         }
@@ -1187,7 +1427,7 @@ function initializeChatbot(config) {
                 console.log("WebSocket connected");
                 setStatus('connected');
             };
-            
+
             socket.onclose = () => {
                 console.log("WebSocket disconnected");
                 setStatus('disconnected');
@@ -1195,17 +1435,17 @@ function initializeChatbot(config) {
                 addMessage('Connection lost. Your next message will start a new conversation.', false, true);
                 isFirstMessage = true;
                 socket = null;
-                
+
                 chatInput.disabled = false;
                 sendButton.disabled = chatInput.value.trim().length === 0;
             };
-            
+
             socket.onerror = (error) => {
                 console.error("WebSocket error:", error);
                 setStatus('disconnected');
                 addMessage('A connection error occurred. Please refresh.', false, true);
             };
-            
+
             socket.onmessage = async (event) => {
                 const data = JSON.parse(event.data);
                 const enableInput = () => {
@@ -1219,22 +1459,22 @@ function initializeChatbot(config) {
                         hideTyping();
                         const renderedHTML = await renderMarkdownWithMermaid(data.payload.trim());
                         addMessage(renderedHTML, false);
-                        
-                        if (data.useful_pages?.length > 0) {
-                            const pagesHTML = '<strong>You may find these pages useful:</strong><ul>' + 
-                                data.useful_pages.map(p => `<li><a href="${p}" target="_blank" style="color: var(--chatbot-primary); text-decoration: none;">${p}</a></li>`).join('') + 
-                                '</ul>';
-                            addMessage(pagesHTML, false);
-                        }
+
+                        // if (data.useful_pages?.length > 0) {
+                        //     const pagesHTML = '<strong>You may find these pages useful:</strong><ul>' + 
+                        //         data.useful_pages.map(p => `<li><a href="${p}" target="_blank" style="color: var(--chatbot-primary); text-decoration: none;">${p}</a></li>`).join('') + 
+                        //         '</ul>';
+                        //     addMessage(pagesHTML, false);
+                        // }
                         enableInput();
                         break;
-                        
+
                     case 'error':
                         hideTyping();
                         addMessage(`Sorry, an error occurred: ${data.payload}`, false);
                         enableInput();
                         break;
-                        
+
                     case 'progress':
                         hideTyping();
                         addMessage(data.payload, false);
@@ -1267,7 +1507,7 @@ function initializeChatbot(config) {
             chatInput.value = '';
             chatInput.style.height = 'auto';
             chatInput.dispatchEvent(new Event('input'));
-            
+
             [sendButton, chatInput].forEach(el => el.disabled = true);
             showTyping();
             connectWebSocket();
@@ -1304,17 +1544,17 @@ function initializeChatbot(config) {
         maximizeButton.addEventListener('click', toggleMaximize);
         newConversationButton.addEventListener('click', startNewConversation);
         sendButton.addEventListener('click', sendMessage);
-        
+
         chatInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
                 sendMessage();
             }
         });
-        
+
         // Initialize character counter
         chatInput.dispatchEvent(new Event('input'));
-        
+
         // Connect WebSocket and focus input if opened by default
         if (isOpenByDefault) {
             connectWebSocket();
@@ -1328,19 +1568,19 @@ function initializeChatbot(config) {
             if (welcomeMessage) {
                 welcomeMessage.innerHTML = `Welcome! I'm here to help you with questions about: <a href="${newUrl}" target="_blank" style="color: var(--chatbot-primary); text-decoration: none;">${newUrl}</a>. What would you like to know?`;
             }
-            
+
             // Check if there's existing chat history (more than just welcome messages)
             const hasExistingHistory = chatMessages.children.length > 3; // context banner + welcome + clear div
-            
+
             if (hasExistingHistory) {
                 // Don't clear history immediately, just add a system message and close WebSocket
                 addMessage(`Page changed to: ${newUrl}. Your next message will start a new conversation for this page.`, false, true);
-                
+
                 // Close WebSocket but don't clear history yet
                 if (socket && socket.readyState === WebSocket.OPEN) {
                     socket.close();
                 }
-                
+
                 // Mark that page has changed
                 hasPageChanged = true;
                 isFirstMessage = true; // Next message will be treated as first message
@@ -1364,9 +1604,9 @@ function setupAutomaticUrlDetection(onPageChangeCallback) {
     const handleUrlChange = () => {
         const newUrl = window.location.href;
         if (newUrl === currentUrl) return;
-        
+
         currentUrl = newUrl;
-        
+
         // Call the callback to handle page change
         if (onPageChangeCallback) {
             onPageChangeCallback(newUrl);
@@ -1376,7 +1616,7 @@ function setupAutomaticUrlDetection(onPageChangeCallback) {
     // Monitor navigation
     ['pushState', 'replaceState'].forEach(method => {
         const original = history[method];
-        history[method] = function(...args) {
+        history[method] = function (...args) {
             original.apply(history, args);
             setTimeout(handleUrlChange, 0);
         };

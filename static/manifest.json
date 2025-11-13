@@ -1,0 +1,10 @@
+{
+  "name": "Chatbot",
+  "description": "Chatbot",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "chatbot.html",
+    "default_icon": "logo-dark.png"
+  }
+}

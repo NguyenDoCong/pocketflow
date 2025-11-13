@@ -1,5 +1,8 @@
 from google import genai
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def call_llm(prompt: str) -> str:
     client = genai.Client(
@@ -14,5 +17,5 @@ if __name__ == "__main__":
 
     # First call - should hit the API
     print("Making call...")
-    response1 = call_llm(test_prompt, use_cache=False)
+    response1 = call_llm(test_prompt)
     print(f"Response: {response1}")
