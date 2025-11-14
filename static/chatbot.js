@@ -453,10 +453,10 @@ function initializeChatbot(config) {
         PRODUCT CARD STYLES
         ======================================== */
 
-        /* Product Grid Container */
-        .pocketflow-product-grid {
+        /* Product Grid Container - Fixed 2 columns */
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 0;
             margin: 12px 0;
             background: white;
@@ -465,7 +465,7 @@ function initializeChatbot(config) {
         }
 
         /* Product Card */
-        .pocketflow-product-card {
+        .product-card {
             padding: 8px;
             display: flex;
             flex-direction: column;
@@ -474,22 +474,26 @@ function initializeChatbot(config) {
             border-bottom: 1px solid #e5e7eb;
             background: white;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            position: relative;
         }
 
-        .pocketflow-product-card:nth-child(1),
-        .pocketflow-product-card:nth-child(2) {
+        /* Border top for first row */
+        .product-card:nth-child(-n+2) {
             border-top: 1px solid #e5e7eb;
         }
 
-        .pocketflow-product-card:hover {
+        /* Remove right border for right column */
+        .product-card:nth-child(2n) {
+            border-right: none;
+        }
+
+        .product-card:hover {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transform: translateY(-2px);
             z-index: 10;
         }
 
         /* Product Image */
-        .pocketflow-product-image-wrapper {
+        .product-image-wrapper {
             display: block;
             border-radius: 8px;
             overflow: hidden;
@@ -498,7 +502,7 @@ function initializeChatbot(config) {
             text-decoration: none;
         }
 
-        .pocketflow-product-image {
+        .product-image {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -506,48 +510,49 @@ function initializeChatbot(config) {
         }
 
         /* Product Content */
-        .pocketflow-product-content {
+        .product-content {
             display: flex;
             flex-direction: column;
             flex: 1;
             margin-top: 8px;
         }
 
-        .pocketflow-product-name {
+        .product-name {
             font-size: 14px;
             font-weight: 500;
             color: #111827;
             text-decoration: none;
             display: -webkit-box;
-            -webkit-line-clamp: 1;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             line-height: 1.3;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             transition: color 0.2s ease;
         }
 
-        .pocketflow-product-card:hover .pocketflow-product-name {
+        .product-card:hover .product-name {
             color: #2563eb;
         }
 
         /* Price Section */
-        .pocketflow-price-wrapper {
+        .price-wrapper {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 6px;
-            margin-top: 4px;
+            margin-top: auto;
+            margin-bottom: 12px;
         }
 
-        .pocketflow-current-price {
+        .current-price {
             color: #ef4444;
             font-weight: 600;
             font-size: 15px;
             line-height: 1;
         }
 
-        .pocketflow-original-price {
+        .original-price {
             color: #6b7280;
             font-size: 12px;
             text-decoration: line-through;
@@ -555,84 +560,8 @@ function initializeChatbot(config) {
             line-height: 1;
         }
 
-        /* Variant Attributes */
-        .pocketflow-variant-attributes {
-            margin-top: 8px;
-            margin-bottom: 4px;
-        }
-
-        .pocketflow-color-label {
-            margin-bottom: 4px;
-            font-size: 12px;
-            letter-spacing: -0.025em;
-            color: #6b7280;
-        }
-
-        .pocketflow-color-swatches {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .pocketflow-color-swatch {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 1px solid #dbeafe;
-            box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.05), 0 0 0 1px #93c5fd;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .pocketflow-color-swatch:hover {
-            transform: scale(1.1);
-        }
-
-        /* Rating Section */
-        .pocketflow-rating-wrapper {
-            display: flex;
-            align-items: center;
-            margin-top: 8px;
-        }
-
-        .pocketflow-stars {
-            display: inline-flex;
-            position: relative;
-            font-size: 14px;
-            line-height: 1;
-        }
-
-        .pocketflow-stars::before {
-            content: "★★★★★";
-            color: #d1d5db;
-            letter-spacing: 2px;
-        }
-
-        .pocketflow-stars::after {
-            content: "★★★★★";
-            color: #fbbf24;
-            position: absolute;
-            left: 0;
-            top: 0;
-            overflow: hidden;
-            width: var(--rating-width, 0%);
-            letter-spacing: 2px;
-        }
-
-        .pocketflow-review-count {
-            color: #6b7280;
-            font-size: 12px;
-            margin-left: 4px;
-            line-height: 1;
-        }
-
         /* Add to Cart Button */
-        .pocketflow-add-to-cart-btn {
-            margin-top: auto;
-            padding-top: 12px;
-        }
-
-        .pocketflow-add-to-cart-btn button {
+        .add-to-cart-btn {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -648,44 +577,35 @@ function initializeChatbot(config) {
             transition: all 0.2s ease;
         }
 
-        .pocketflow-add-to-cart-btn button:hover {
+        .add-to-cart-btn:hover {
             background: #2563eb;
             color: white;
             border-color: #2563eb;
         }
 
-        .pocketflow-add-to-cart-btn svg {
+        .add-to-cart-btn svg {
             margin-right: 6px;
             flex-shrink: 0;
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .pocketflow-product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-            
-            .pocketflow-product-card {
+            .product-card {
                 padding: 6px;
             }
             
-            .pocketflow-product-name {
+            .product-name {
+                font-size: 12px;
+            }
+            
+            .current-price {
                 font-size: 13px;
             }
             
-            .pocketflow-current-price {
-                font-size: 14px;
+            .add-to-cart-btn {
+                font-size: 12px;
+                padding: 6px 8px;
             }
-        }
-
-        /* Special styling when inside bot message */
-        .pocketflow-message.bot .pocketflow-product-grid {
-            max-width: 100%;
-            margin: 8px -4px;
-        }
-
-        .pocketflow-message.bot .pocketflow-product-card {
-            background: #ffffff;
         }
 
         /* --- COPY BUTTON STYLES --- */

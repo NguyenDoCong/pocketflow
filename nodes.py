@@ -350,21 +350,23 @@ Response Instructions:
 Provide your response in Markdown format. If possible, create a card for each link following this format:
 **Cấu trúc HTML:**
 ```html
-<div class="product-card">
-  <a href="[URL]" class="product-image-wrapper">
-    <img src="[IMAGE_URL]" alt="[ALT]" class="product-image">
-  </a>
-  <div class="product-content">
-    <a href="[URL]" class="product-name">[TÊN SẢN PHẨM]</a>
-    <div class="price-wrapper">
-      <div class="current-price">[GIÁ HIỆN TẠI]</div>
-      <del class="original-price">[GIÁ GỐC]</del>
+<div class="product-grid">
+  <div class="product-card">
+    <a href="URL" class="product-image-wrapper">
+      <img src="IMAGE" alt="NAME" class="product-image">
+    </a>
+    <div class="product-content">
+      <a href="URL" class="product-name">TÊN SẢN PHẨM</a>
+      <div class="price-wrapper">
+        <div class="current-price">GIÁ HIỆN TẠI</div>
+        <del class="original-price">GIÁ GỐC</del>
+      </div>
     </div>
+    <button class="add-to-cart-btn" onclick="window.open('URL', '_blank')">
+      [SVG ICON]
+      Thêm vào giỏ
+    </button>
   </div>
-  <button class="add-to-cart-btn">
-    [SVG ICON]
-    Thêm vào giỏ
-  </button>
 </div>
 ```
 
